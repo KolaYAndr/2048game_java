@@ -1,0 +1,9 @@
+package classes;
+
+public enum Move {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    NONE
+}
