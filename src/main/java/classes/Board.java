@@ -34,19 +34,18 @@ public class Board {
             moveToFront(row);
         }
     }
+
     //new
     private void moveToFront(List<Field> column) {
         //соединяем, что можем
         for (int i = 0; i < column.size() - 1; i++) {
             Field upperField = column.get(i);
-            for (int j = i + 1; j < size; j++) {
-                int indexOfFirstNotEmpty = findIndexOfFirstNotEmpty(column, j);
+            int indexOfFirstNotEmpty = findIndexOfFirstNotEmpty(column, i + 1);
 
-                if (indexOfFirstNotEmpty != -1) {
-                    Field lowerField = column.get(indexOfFirstNotEmpty);
+            if (indexOfFirstNotEmpty != -1) {
+                Field lowerField = column.get(indexOfFirstNotEmpty);
 
-                    if (!upperField.isEmpty() & !lowerField.isEmpty()) upperField.merge(lowerField);
-                }
+                if (!upperField.isEmpty() & !lowerField.isEmpty()) upperField.merge(lowerField);
             }
         }
         //двигаем к началу
