@@ -104,6 +104,13 @@ public class Board {
         empty.get(randomIndex).spawnTile();
     }
 
+//    public boolean notifyChanges() {
+//        if (isChanged) {
+//            isChanged = false;
+//            return true;
+//        } else return false;
+//    }
+
     private ArrayList<Field> getRow(int index) {
         return fields.get(index);
     }
@@ -149,6 +156,17 @@ public class Board {
             }
         }
         return empty;
+    }
+
+    public ArrayList<Field> getTakenPositions() {
+        ArrayList<Field> taken = new ArrayList<>(size * size);
+
+        for (ArrayList<Field> fieldArray : fields) {
+            for (Field field : fieldArray) {
+                if (!field.isEmpty()) taken.add(field);
+            }
+        }
+        return taken;
     }
 
     public Board(int size) {

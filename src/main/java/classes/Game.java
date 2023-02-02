@@ -3,7 +3,7 @@ package classes;
 
 import java.util.Scanner;
 
-public class Game {
+public class Game extends Thread {
     private final Board board;
     private final Checker checker;
 
@@ -12,25 +12,23 @@ public class Game {
         this.checker = new Checker(board);
     }
 
-    public void start() {
-        board.show();
-
-
-        while (checker.checkForEnd() == 0) {
+    @Override
+    public void run() {
+        do {
+            board.show();
             Scanner scanner = new Scanner(System.in);
             String line = scanner.nextLine();
 
-            Move nextMove;
             switch (line) {
-                case "w" -> nextMove = Move.UP;
-                case "d" -> nextMove = Move.RIGHT;
-                case "s" -> nextMove = Move.DOWN;
-                case "a" -> nextMove = Move.LEFT;
-                default -> nextMove = Move.NONE;
+                case "w" -> board.move(Move.UP);
+                case "s" -> board.move(Move.DOWN);
+                case "d" -> board.move(Move.RIGHT);
+                case "a" -> board.move(Move.LEFT);
             }
 
-            board.move(nextMove);
-            board.show();
-        }
+        } while (checker.checkForEnd() == 0);
+
+        if (checker.checkForEnd() == -1) System.out.println("Вы проиграли");
+        else System.out.println("Вы выиграли");
     }
 }
