@@ -3,6 +3,8 @@ package classes;
 
 import java.util.Scanner;
 
+//класс, отвечающий за проведение всей игры
+//во время создания через конструктор инициализирует доску и проверящий класс
 public class Game extends Thread {
     private final Board board;
     private final Checker checker;
